@@ -1,0 +1,3 @@
+By using the post-increment & -decrement operations new temporary
+objects are being created instead of modifying a value of the existing
+object, so the performance could suffer depending on the object type.

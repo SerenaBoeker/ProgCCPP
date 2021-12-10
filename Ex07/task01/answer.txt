@@ -1,0 +1,58 @@
+Task02:
+Output:
+My computer requires 0.067755 seconds to execute StaticBase::myFunc() 50000000 times
+My computer requires 0.076854 seconds to execute pure.myFunc() 50000000 times
+My computer requires 0.07748 seconds to execute vbase.nvFunct() 50000000 times
+My computer requires 0.076249 seconds to execute vbase.virtFunc() 50000000 times
+My computer requires 0.077144 seconds to execute vder.myFunc() 50000000 times
+My computer requires 0.077523 seconds to execute vder.virtFunc() 50000000 times
+My computer requires 0.07692 seconds to execute vder.nvFunct() 50000000 times
+My computer requires 0.079018 seconds to execute ppure->myFunc() 50000000 times
+My computer requires 0.080562 seconds to execute pvbase->nvFunct() 50000000 times
+My computer requires 0.089851 seconds to execute pvbase->virtFunc() 50000000 times
+My computer requires 0.079521 seconds to execute pvder->myFunc() 50000000 times
+My computer requires 0.080056 seconds to execute pvder->nvFunct() 50000000 times
+My computer requires 0.089666 seconds to execute pvder->virtFunc() 50000000 times
+My computer requires 0.079184 seconds to execute pvbaseder->nvFunct() 50000000 times
+My computer requires 0.088599 seconds to execute pvbaseder->virtFunc() 50000000 times
+
+StaticBase::myFunc() is the fastest, because it is not called through an object (static method,
+no need for an object to exist in order to call it).
+
+The member functions 
+    pure.myFunc()
+    vbase.nvFunct()
+    vbase.virtFunc()
+    vder.myFunc()
+    vder.virtFunc()
+    vder.nvFunct()
+are an average of 10 ms slower than the static method, but still the second fastest. This is probably
+due to the fact that they are directly accessed through the corresponding object. 
+
+The functions
+    ppure->myFunc()
+    pvbase->nvFunct()
+    pvder->myFunc()
+    pvder->nvFunct()
+are slower than the last group by a bit (~2 ms), probably because in order to be called, the object the
+pointer points to needs to be first accessed, causing a small overhead.
+
+The slowest are the functions
+    pvbase->virtFunc()
+    pvder->virtFunc()
+    pvbaseder->virtFunc()
+probably because in addition to the former function group they need to be looked up the vtables of
+the classes, since they are virtual functions.
+
+
+Task03:
+Output:
+My computer requires 0.078833 seconds to execute (static_cast<VirtDer*> (pvbaseder))->myFunc() 50000000 times
+My computer requires 0.400024 seconds to execute (dynamic_cast<VirtDer*> (pvbaseder))->myFunc() 50000000 times
+
+Static casting is not always safe when converting a pointer of a base class to a pointer of a derived class,
+because there is no type check at runtime, i.e. the pointer might point to an object of a completely different
+class, but the static casting still returns a pointer that is now not safe to use. So the result of the 
+static cast must be verified before using.
+In contrast to this, dynamic casting performs a runtime type check at the cost of an overhead and returns 0 
+if it fails, so it is safe to use the pointer afterwards.

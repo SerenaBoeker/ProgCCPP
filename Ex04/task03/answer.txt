@@ -1,0 +1,33 @@
+Output of the program is: "top = 1, bottom = 42"
+The error is in the for-loop, the index can take the value 5,
+but the last element in the array is at index 4, so s.bottom
+gets overwritten by the for-loop when i = 5, because it has been
+saved to memory exactly after the array.
+
+Start gdb with executable:
+    gdb overflow
+
+Place breakpoint at main:
+    b main
+
+Run executable:
+    r
+
+Watch variable s.bottom and continue:
+    watch s.bottom
+    c
+
+First change of variable s.bottom is detected (when it is set to 2),
+continue:
+    c
+
+Second change is detected, s.bottom is set from 2 to 42, instruction
+pointer is at the beginning of the loop, so the new value must have
+been set during the loop, to check, print i and s.arr:
+    p /d s.arr
+    p /d i
+
+Here we notice that all array elements have been already overwritten 
+with '42' and the index is 5, but since it is an array, the last element
+is at index 4, so it's an overflow, causing the variable that is in the 
+memory after the array to also be overwritten.

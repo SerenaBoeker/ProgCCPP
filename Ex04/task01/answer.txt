@@ -1,0 +1,39 @@
+Macros:
+    Advantages:
+
+    - work with different data types as long as the data types support the operations
+        (can also be a disadvantage though, because there is no type checking)
+    - are faster than function calls because the expression gets replaced at compile time
+        and thus can reduce time
+
+    Disadvantages:
+    
+    - no type checking (as stated above)
+    - behaves strangely when passing 'b++', the increment operator evaluates twice! 
+        (which is not something one would expect) so it's possible that some expressions 
+        would get evaluated even multiple times and it would be hard to find out, what
+        causes this problem
+
+Functions:
+    Advantages:
+    
+    - type checking takes place
+    - the increment operator evaluates only once, a behaviour one would expect when passing
+        an 'b++' parameter
+
+    Disadvantages:
+
+    - required function calls take longer than simple text replacement
+    - definition of multiple functions for every desired data type is necessary (overloading
+        functions)
+
+
+The commented line in the code does not compile because the function call is ambiguous,
+the first parameter is an integer and the second a double, so the compiler does not know
+which of the two functions to call. (Although why not cast the integer to a double and use
+the second maxf function?)
+
+
+maxf1 -> maxf(int) is called, because both a and b are integers;
+maxf2 -> maxf(double) is called, because both parameters are doubles;
+maxf3 -> maxf(int) is called, because both a and b are still integers.

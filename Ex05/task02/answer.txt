@@ -1,0 +1,5 @@
+Since a global scope object "Hellotext" has been declared, the compiler 
+calls the constructor of the "Hellotext" object before the main function,
+therefore "---start---" is printed on the console. Then the destructor of 
+the object is called by the compiler when the main function terminates,
+and "---end---" is printed out after the printing of the main function.

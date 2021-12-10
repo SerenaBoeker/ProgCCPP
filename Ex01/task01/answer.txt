@@ -1,0 +1,18 @@
+Output:
+
+size of char: 		1 byte(s)
+size of short:		2 byte(s)
+size of int: 		4 byte(s)
+size of long: 		8 byte(s)
+size of long long: 	8 byte(s)
+size of float:		4 byte(s)
+size of double: 	8 byte(s)
+size of long double: 	16 byte(s)
+size of pointer: 	8 byte(s)
+
+Compiler:	gcc 9.3.0
+Platform:	Ubuntu 20.04 64 bit
+
+On Windows 11 64 bit using Cygwin and Mingw gcc compiler
+(x86_64-w64-mingw32-gcc (GCC) 11.2.0) the output for the size of long is 4
+instead of 8 (on Ubuntu 64bit).

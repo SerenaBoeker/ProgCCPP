@@ -1,0 +1,12 @@
+My measurements:
+10000 repetitions:
+    My computer requires 8.834 seconds to execute Copy assignment test 10000 times
+    My computer requires 8.66663 seconds to execute Move assignment test 10000 times
+100000 repetitions (10x):
+    My computer requires 87.4519 seconds to execute Copy assignment test 100000 times
+    My computer requires 86.577 seconds to execute Move assignment test 100000 times
+
+The difference is probably caused by the extra operations that have to be performed
+when copying an object instead of moving its values: in this case an extra memcpy()
+operation is done for 100000 elements instead of just one (ok maybe 4) assignments
+of few values.

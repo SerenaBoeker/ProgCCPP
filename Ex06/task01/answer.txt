@@ -1,0 +1,5 @@
+It's not necessary to overload comparison operators to compare
+two MyTime objects because the MyTime objects are converted to
+int using the type conversion function and then compared, so
+the comparison operator is applied in the end on two integers
+(which is already defined, no need to overload).

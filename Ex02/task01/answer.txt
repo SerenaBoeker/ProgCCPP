@@ -1,0 +1,9 @@
+I would expect that "globalvar = 2" would be printed on the console,
+but the actual output is "globalvar = 1073741824", probably because
+the variable globalvar has been declared as a float in scope2.c, 
+but %d expects an int (and there is no warning on that during compilation,
+because globalvar has been declared as an int in scope1.c in the first place).
+
+Using the option "--warn-common" warns you that the variable "globalvar"
+gets later on overridden ("/usr/bin/ld: /tmp/ccTJTvOP.o: warning: common of
+'globarvar' overridden by definition from /tmp/cc2TgOyO.o").
